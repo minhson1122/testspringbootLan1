@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách nhân viên</title>
+</head>
+<body>
+<h1><a href="/employee">List Employee</a></h1>
+<form action="/employees/search" >
+    <input type="text" name="name" th:value="${searchTerm}" placeholder="Search by name">
+    <button type="submit">Search</button>
+</form>
+<form action="/employees/searchSalary" method="get">
+    <input type="number" name="minSalary" placeholder="minSalary">
+    <input type="number" name="maxSalary" placeholder="maxSalary">
+    <button type="submit">search</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Salary</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${list}">
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.salary}"></td>
+        <td><button><a th:href="@{/employees/edit/__${item.id}__}">Edit</a></button></td>
+        <td><button><a th:href="@{/employees/delete/__${item.id}__}">Delete</a></button></td>
+    </tr>
+    </div>
+    </tbody>
+</table>
+<a th:href="@{/employees?currentPage=__${0}__}"><button>1</button></a>
+<a th:href="@{/employees?currentPage=__${1}__}"><button>2</button></a>
+<a href="/employees/add"><button>Add New</button></a>
+</body>
+</html>
